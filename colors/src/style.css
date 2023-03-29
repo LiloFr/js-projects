@@ -13,8 +13,6 @@
 }
 
 .column{
-  border: 1px solid black;
-  background: lightblue;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

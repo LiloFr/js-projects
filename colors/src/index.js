@@ -41,20 +41,28 @@ function copyToClipboard(text){
   return navigator.clipboard.writeText(text)
 }
 
-function setRandomColors() {
-  const colors = []
-  columns.forEach(column => {
+function setRandomColors(isInitial) {
+  const colors = isInitial ? getColorsFromHash() : []
+
+  columns.forEach((column, index) => {
     const isLocked = column.querySelector('i').classList.contains('fa-lock')
     const text = column.querySelector('h2')
     const button = column.querySelector('button')
-    const color = chroma.random()
-
+    
     if (isLocked){
       colors.push(text.textContent)
       return
     } 
-     
-    colors.push(color)
+    
+    const color = isInitial 
+    ? colors[index] 
+      ? colors[index]
+      : chroma.random()
+    : chroma.random()
+
+    if (!isInitial){
+      colors.push(color)
+    }
 
     // const color = generateColor()
 
@@ -70,11 +78,18 @@ function setRandomColors() {
 
 function updateHashColors(colors = []) {
   document.location.hash = colors.map((column) => {
-    console.log(column)
     return column.toString().substring(1)
   }).join('-')
   }
 
+function getColorsFromHash() {
+  if (document.location.hash.length > 1) {
+    return document.location.hash
+    .substring(1)
+    .split('-')
+    .map((color) => '#' + color)
+  }
+  return []
+}
 
-
-setRandomColors();
+setRandomColors(true);

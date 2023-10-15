@@ -1,12 +1,27 @@
 const inputField = document.querySelector('.input-form input');
 const addButton = document.querySelector('.input-form button');
 const tasksList = document.querySelector('.tasks-list');
-const tasksLi = document.querySelectorAll('li');
+const inputForm = document.querySelector('.input-form');
 
+inputForm.addEventListener('keyup', (e) => {
+    if (e.keyCode === 13){
+        e.preventDefault();
+        AddTask();
+    }
+})
 
-addButton.addEventListener('click', inputHandler)
+addButton.addEventListener('click', AddTask);
 
-function inputHandler(){
+tasksList.addEventListener('click', (e) => {
+    if (e.target.tagName === 'LI'){
+        e.target.classList.toggle('checked');
+    }
+    if (e.target.tagName === 'BUTTON'){
+        e.target.parentElement.remove();
+    }
+})
+
+function AddTask(){
     if (inputField.value === ''){
         alert('Введите текст');
     }
@@ -23,13 +38,4 @@ function inputHandler(){
         inputField.focus();
     }
 }
-
-tasksList.addEventListener('click', (e) => {
-        if (e.target.tagName === 'LI'){
-            e.target.classList.toggle('checked');
-        }
-        if (e.target.tagName === 'BUTTON'){
-            e.target.parentElement.remove();
-        }
-})
 

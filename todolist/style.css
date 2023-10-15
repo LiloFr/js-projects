@@ -47,7 +47,7 @@ body{
     padding: 10px;
 }
 
-button{
+.input-form button{
     border-radius: 0px 15px 15px 0;
     padding: 10px 20px;
     border: none;
@@ -63,6 +63,9 @@ ul{
 }
 
 ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
     list-style: none;
     margin-bottom: 5px;
@@ -85,11 +88,24 @@ ul li::before{
     top: 5px;
 }
 
-.checked{
+ul li.checked{
     color: rgba(184, 184, 184, 0.555);
     text-decoration: line-through;
 }
 
 li.checked::before{
     background-image: url('images/checked.png');
+}
+
+li button{
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
 }

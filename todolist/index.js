@@ -15,9 +15,11 @@ addButton.addEventListener('click', AddTask);
 tasksList.addEventListener('click', (e) => {
     if (e.target.tagName === 'LI'){
         e.target.classList.toggle('checked');
+        saveData();
     }
     if (e.target.tagName === 'BUTTON'){
         e.target.parentElement.remove();
+        saveData();
     }
 })
 
@@ -31,11 +33,21 @@ function AddTask(){
         tasksList.append(li);
 
         let deleteButton = document.createElement("button");
-        deleteButton.innerHTML = 'X';
+        deleteButton.textContent = 'X';
         li.appendChild(deleteButton);
 
         inputField.value = '';
         inputField.focus();
+        saveData();
     }
 }
 
+function saveData() {
+    localStorage.setItem("data", tasksList.innerHTML);
+}
+
+function showTask(){
+    tasksList.innerHTML = localStorage.getItem("data");
+}
+
+showTask()
